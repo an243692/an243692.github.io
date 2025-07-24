@@ -1986,31 +1986,41 @@ textarea {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.5rem;
+    width: 100%;
+    word-break: break-word;
   }
   .method-stats, .type-stats {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.3rem;
     width: 100%;
+    word-break: break-word;
   }
   .method-info, .type-info {
     min-width: 0;
     width: 100%;
-    font-size: 0.95rem;
+    font-size: 0.92rem;
+    word-break: break-word;
   }
   .method-amount, .type-count {
     min-width: unset;
-    font-size: 1rem;
+    font-size: 0.95rem;
+    word-break: break-word;
   }
   .method-bar, .type-bar {
     width: 100%;
-    min-width: 60px;
+    min-width: 40px;
     max-width: 100%;
   }
   .method-percentage, .type-percentage {
-    min-width: unset;
-    font-size: 0.95rem;
+    min-width: 0 !important;
+    max-width: 100%;
+    font-size: 0.92rem;
     text-align: left;
     width: 100%;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    display: block;
   }
 }
