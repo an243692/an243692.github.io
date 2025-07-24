@@ -1981,4 +1981,36 @@ textarea {
     justify-content: center;
     width: 100%;
   }
+  /* Ajuste para cartas de método de pago y tipo de entrega */
+  .payment-method-item, .delivery-type-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .method-stats, .type-stats {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
+    width: 100%;
+  }
+  .method-info, .type-info {
+    min-width: 0;
+    width: 100%;
+    font-size: 0.95rem;
+  }
+  .method-amount, .type-count {
+    min-width: unset;
+    font-size: 1rem;
+  }
+  .method-bar, .type-bar {
+    width: 100%;
+    min-width: 60px;
+    max-width: 100%;
+  }
+  .method-percentage, .type-percentage {
+    min-width: unset;
+    font-size: 0.95rem;
+    text-align: left;
+    width: 100%;
+  }
 }
