@@ -1933,20 +1933,26 @@ textarea {
   }
   .summary-cards {
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: 0.75rem;
   }
-  .chart-card,
-  .recent-activity {
+  .summary-card {
     padding: 1rem;
+    gap: 0.75rem;
+    min-width: 0;
   }
-  .tab-navigation {
-    overflow-x: auto;
-    flex-wrap: nowrap;
-    gap: 0.25rem;
+  .card-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.1rem;
   }
-  .tab-button {
-    min-width: 120px;
-    font-size: 0.8rem;
-    padding: 0.5rem 0.75rem;
+  .card-content h3 {
+    font-size: 0.9rem;
+  }
+  .card-value {
+    font-size: 1.2rem;
+  }
+  .card-change {
+    font-size: 0.7rem;
+    padding: 0.15rem 0.5rem;
   }
 }
