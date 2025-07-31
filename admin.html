@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Administrativo - VAHM SHOP</title>
+    <title>Panel de Administración - VAHM SHOP</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="admin.css">
@@ -13,8 +13,9 @@
         <nav class="nav">
             <div class="nav-brand">
                 <i class="fas fa-shield-halved"></i>
-                <span>Dashboard Administrativo</span>
+                <span>Panel Administrador</span>
             </div>
+            
             <div class="nav-stats">
                 <div class="stat-item">
                     <i class="fas fa-shopping-bag"></i>
@@ -36,21 +37,13 @@
     </header>
 
     <div class="tab-navigation">
-        <button class="tab-button active" onclick="adminManager.switchTab('dashboard')">
-            <i class="fas fa-chart-line"></i>
-            Dashboard
-        </button>
-        <button class="tab-button" onclick="adminManager.switchTab('products')">
+        <button class="tab-button active" onclick="adminManager.switchTab('products')">
             <i class="fas fa-boxes-stacked"></i>
             Productos
         </button>
         <button class="tab-button" onclick="adminManager.switchTab('orders')">
             <i class="fas fa-shopping-bag"></i>
             Pedidos
-        </button>
-        <button class="tab-button" onclick="adminManager.switchTab('payments')">
-            <i class="fas fa-credit-card"></i>
-            Pagos
         </button>
         <button class="tab-button" onclick="adminManager.switchTab('users')">
             <i class="fas fa-users"></i>
@@ -59,138 +52,8 @@
     </div>
 
     <div class="container">
-        <!-- Dashboard Tab -->
-        <div id="dashboardTab" class="tab-content active">
-            <div class="dashboard-grid">
-                <!-- Summary Cards -->
-                <div class="summary-cards">
-                    <div class="summary-card sales">
-                        <div class="card-icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <div class="card-content">
-                            <h3>Ventas Totales</h3>
-                            <p class="card-value" id="dashboardSales">$0.00</p>
-                            <small class="card-change positive">+12.5% vs mes anterior</small>
-                        </div>
-                    </div>
-                    
-                    <div class="summary-card orders">
-                        <div class="card-icon">
-                            <i class="fas fa-shopping-cart"></i>
-                        </div>
-                        <div class="card-content">
-                            <h3>Pedidos</h3>
-                            <p class="card-value" id="dashboardOrders">0</p>
-                            <small class="card-change positive">+8.2% vs mes anterior</small>
-                        </div>
-                    </div>
-                    
-                    <div class="summary-card customers">
-                        <div class="card-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <div class="card-content">
-                            <h3>Clientes</h3>
-                            <p class="card-value" id="dashboardCustomers">0</p>
-                            <small class="card-change positive">+15.7% vs mes anterior</small>
-                        </div>
-                    </div>
-                    
-                    <div class="summary-card products">
-                        <div class="card-icon">
-                            <i class="fas fa-box"></i>
-                        </div>
-                        <div class="card-content">
-                            <h3>Productos</h3>
-                            <p class="card-value" id="dashboardProducts">0</p>
-                            <small class="card-change neutral">Sin cambios</small>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Charts Section -->
-                <div class="charts-section">
-                    <div class="chart-card">
-                        <h3><i class="fas fa-chart-bar"></i> Ventas por Método de Pago</h3>
-                        <div class="payment-methods-chart" id="paymentMethodsChart">
-                            <div class="payment-method-item">
-                                <div class="method-info">
-                                    <i class="fas fa-credit-card"></i>
-                                    <span>Tarjeta (Mercado Pago)</span>
-                                </div>
-                                <div class="method-stats">
-                                    <span class="method-amount" id="cardPayments">$0.00</span>
-                                    <div class="method-bar">
-                                        <div class="bar-fill card-bar" id="cardBar"></div>
-                                    </div>
-                                    <span class="method-percentage" id="cardPercentage">0%</span>
-                                </div>
-                            </div>
-                            <div class="payment-method-item">
-                                <div class="method-info">
-                                    <i class="fas fa-money-bill-wave"></i>
-                                    <span>Efectivo</span>
-                                </div>
-                                <div class="method-stats">
-                                    <span class="method-amount" id="cashPayments">$0.00</span>
-                                    <div class="method-bar">
-                                        <div class="bar-fill cash-bar" id="cashBar"></div>
-                                    </div>
-                                    <span class="method-percentage" id="cashPercentage">0%</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="chart-card">
-                        <h3><i class="fas fa-truck"></i> Tipos de Entrega</h3>
-                        <div class="delivery-types-chart" id="deliveryTypesChart">
-                            <div class="delivery-type-item">
-                                <div class="type-info">
-                                    <i class="fas fa-store"></i>
-                                    <span>Recoger en Tienda</span>
-                                </div>
-                                <div class="type-stats">
-                                    <span class="type-count" id="pickupOrders">0</span>
-                                    <div class="type-bar">
-                                        <div class="bar-fill pickup-bar" id="pickupBar"></div>
-                                    </div>
-                                    <span class="type-percentage" id="pickupPercentage">0%</span>
-                                </div>
-                            </div>
-                            <div class="delivery-type-item">
-                                <div class="type-info">
-                                    <i class="fas fa-truck-fast"></i>
-                                    <span>Envío a Domicilio</span>
-                                </div>
-                                <div class="type-stats">
-                                    <span class="type-count" id="deliveryOrders">0</span>
-                                    <div class="type-bar">
-                                        <div class="bar-fill delivery-bar" id="deliveryBar"></div>
-                                    </div>
-                                    <span class="type-percentage" id="deliveryPercentage">0%</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recent Activity -->
-                <div class="recent-activity">
-                    <h3><i class="fas fa-clock"></i> Actividad Reciente</h3>
-                    <div class="activity-list" id="recentActivity">
-                        <div class="loading">
-                            <i class="fas fa-spinner fa-spin"></i>
-                            <p>Cargando actividad reciente...</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <!-- Products Tab -->
-        <div id="productsTab" class="tab-content">
+        <div id="productsTab" class="tab-content active">
             <div class="products-tab">
                 <section class="form-section">
                     <div class="form-header">
@@ -252,6 +115,7 @@
                             </div>
                         </div>
 
+                        <!-- Enhanced Images Section -->
                         <div class="images-section">
                             <h3>
                                 <i class="fas fa-images"></i>
@@ -269,6 +133,7 @@
                                 </button>
                             </div>
 
+                            <!-- URL Upload -->
                             <div class="upload-content active" id="urlUpload">
                                 <div class="url-input-container">
                                     <input type="url" id="imageUrlInput" placeholder="https://ejemplo.com/imagen.jpg">
@@ -282,6 +147,7 @@
                                 </small>
                             </div>
 
+                            <!-- File Upload -->
                             <div class="upload-content" id="fileUpload">
                                 <div class="file-upload-area" onclick="document.getElementById('fileInput').click()">
                                     <i class="fas fa-cloud-upload-alt"></i>
@@ -291,6 +157,7 @@
                                 <input type="file" id="fileInput" multiple accept="image/*" onchange="adminManager.handleFileSelect(event)">
                             </div>
 
+                            <!-- Images Preview -->
                             <div class="images-preview" id="imagesPreview"></div>
                         </div>
 
@@ -320,70 +187,15 @@
         <!-- Orders Tab -->
         <div id="ordersTab" class="tab-content">
             <section class="orders-section">
-                <div class="section-header">
-                    <h2 class="section-title">
-                        <i class="fas fa-shopping-bag"></i>
-                        Gestión de Pedidos
-                    </h2>
-                    <div class="order-filters">
-                        <select id="orderStatusFilter" class="filter-select">
-                            <option value="">Todos los estados</option>
-                            <option value="pending">Pendientes</option>
-                            <option value="completed">Completados</option>
-                            <option value="cancelRequested">Cancelación Solicitada</option>
-                            <option value="cancelled">Cancelados</option>
-                        </select>
-                        <select id="paymentMethodFilter" class="filter-select">
-                            <option value="">Todos los métodos</option>
-                            <option value="cash">Efectivo</option>
-                            <option value="card">Tarjeta</option>
-                        </select>
-                    </div>
-                </div>
+                <h2 class="section-title">
+                    <i class="fas fa-shopping-bag"></i>
+                    Pedidos por Cliente
+                </h2>
                 <div id="ordersGrid">
                     <div class="loading">
                         <i class="fas fa-spinner fa-spin"></i>
                         <h3>Cargando pedidos</h3>
                         <p>Obteniendo información de pedidos</p>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <!-- Payments Tab -->
-        <div id="paymentsTab" class="tab-content">
-            <section class="payments-section">
-                <h2 class="section-title">
-                    <i class="fas fa-credit-card"></i>
-                    Registro de Pagos
-                </h2>
-                <div class="payment-summary-cards">
-                    <div class="payment-summary-card">
-                        <div class="payment-card-icon mercadopago">
-                            <i class="fas fa-credit-card"></i>
-                        </div>
-                        <div class="payment-card-content">
-                            <h4>Pagos con Tarjeta</h4>
-                            <p class="payment-amount" id="cardPaymentTotal">$0.00</p>
-                            <small id="cardPaymentCount">0 transacciones</small>
-                        </div>
-                    </div>
-                    <div class="payment-summary-card">
-                        <div class="payment-card-icon cash">
-                            <i class="fas fa-money-bill-wave"></i>
-                        </div>
-                        <div class="payment-card-content">
-                            <h4>Pagos en Efectivo</h4>
-                            <p class="payment-amount" id="cashPaymentTotal">$0.00</p>
-                            <small id="cashPaymentCount">0 transacciones</small>
-                        </div>
-                    </div>
-                </div>
-                <div id="paymentsGrid">
-                    <div class="loading">
-                        <i class="fas fa-spinner fa-spin"></i>
-                        <h3>Cargando pagos</h3>
-                        <p>Obteniendo información de pagos</p>
                     </div>
                 </div>
             </section>
@@ -407,11 +219,11 @@
         </div>
     </div>
 
-    <!-- Enhanced thermal ticket template -->
+    <!-- Enhanced thermal ticket template with complete customer information -->
     <div id="thermalTicket" class="thermal-ticket" style="display: none;">
         <div class="ticket-header">
-            <div class="ticket-title">VAHM SHOP</div>
-            <div class="ticket-subtitle">MAGIA PARA TUS IDEAS</div>
+            <div class="ticket-title">SOFT DUCK</div>
+            <div class="ticket-subtitle">LOS MEJORES PRODCUTOS, AL MEJOR PRECIO</div>
             <div class="ticket-date" id="ticketDate"></div>
         </div>
 
@@ -423,8 +235,6 @@
             <div class="ticket-customer-details" id="ticketCustomerEmail"></div>
         </div>
 
-        <div class="ticket-payment-info" id="ticketPaymentInfo"></div>
-
         <div class="ticket-delivery-info" id="ticketDeliveryInfo"></div>
 
         <div class="ticket-items" id="ticketItems"></div>
@@ -435,11 +245,12 @@
             <div class="ticket-total" id="ticketTotal"></div>
             <div class="ticket-thanks">¡GRACIAS POR TU COMPRA!</div>
             <div class="ticket-thanks">VUELVE PRONTO</div>
-            <div class="ticket-contact">WhatsApp: +52 56 2727 4791</div>
-            <div class="ticket-contact">Email: vhjocar@gmail.com</div>
+            <div class="ticket-contact">WhatsApp: +52 123 456 7890</div>
+            <div class="ticket-contact">Email: andrehm143@com</div>
         </div>
     </div>
     
     <script type="module" src="admin.js"></script>
+
 </body>
 </html>
