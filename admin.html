@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel de Administración - VAHM SHOP</title>
+    <title>Panel de Administración - SOFT DUCK</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="admin.css">
@@ -100,19 +100,30 @@
                                 <input type="number" id="productWholesalePrice" step="0.01" min="0" placeholder="0.00" required>
                             </div>
                             <div class="form-group">
+                                <label for="productWholesaleQuantity">
+                                    <i class="fas fa-calculator"></i>
+                                    Cantidad para Mayoreo
+                                </label>
+                                <input type="number" id="productWholesaleQuantity" min="2" placeholder="4" value="4" required>
+                                <small style="color: var(--text-muted); font-size: 0.75rem; margin-top: 0.25rem; display: block;">
+                                    Cantidad mínima para aplicar precio de mayoreo
+                                </small>
+                            </div>
+                            <div class="form-group">
                                 <label for="productStock">
                                     <i class="fas fa-boxes"></i>
                                     Stock Inicial
                                 </label>
                                 <input type="number" id="productStock" min="0" placeholder="0" required>
                             </div>
-                            <div class="form-group">
-                                <label for="productCategory">
-                                    <i class="fas fa-folder"></i>
-                                    Categoría
-                                </label>
-                                <input type="text" id="productCategory" placeholder="Ej: Electrónicos, Ropa, etc." required>
-                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="productCategory">
+                                <i class="fas fa-folder"></i>
+                                Categoría
+                            </label>
+                            <input type="text" id="productCategory" placeholder="Ej: Electrónicos, Ropa, etc." required>
                         </div>
 
                         <!-- Enhanced Images Section -->
@@ -223,7 +234,7 @@
     <div id="thermalTicket" class="thermal-ticket" style="display: none;">
         <div class="ticket-header">
             <div class="ticket-title">SOFT DUCK</div>
-            <div class="ticket-subtitle">LOS MEJORES PRODCUTOS, AL MEJOR PRECIO</div>
+            <div class="ticket-subtitle">LOS MEJORES PRODUCTOS, AL MEJOR PRECIO</div>
             <div class="ticket-date" id="ticketDate"></div>
         </div>
 
@@ -245,8 +256,8 @@
             <div class="ticket-total" id="ticketTotal"></div>
             <div class="ticket-thanks">¡GRACIAS POR TU COMPRA!</div>
             <div class="ticket-thanks">VUELVE PRONTO</div>
-            <div class="ticket-contact">WhatsApp: +52 123 456 7890</div>
-            <div class="ticket-contact">Email: andrehm143@com</div>
+            <div class="ticket-contact">WhatsApp: +52 56 2727 4791</div>
+            <div class="ticket-contact">Email: vhjocar@gmail.com</div>
         </div>
     </div>
     
