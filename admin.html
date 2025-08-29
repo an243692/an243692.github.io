@@ -49,6 +49,14 @@
             <i class="fas fa-users"></i>
             Usuarios
         </button>
+        <button class="tab-button" onclick="adminManager.switchTab('statistics')">
+            <i class="fas fa-chart-line"></i>
+            Estadísticas
+        </button>
+        <button class="tab-button" onclick="adminManager.switchTab('simulations')">
+            <i class="fas fa-robot"></i>
+            Simulaciones
+        </button>
     </div>
 
     <div class="container">
@@ -228,6 +236,599 @@
                 </div>
             </section>
         </div>
+
+        <!-- Advanced Statistics Tab -->
+        <div id="statisticsTab" class="tab-content">
+            <section class="statistics-section">
+                <div class="stats-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-chart-line"></i>
+                        Análisis Estadístico Avanzado con Monte Carlo
+                    </h2>
+                    <div class="stats-subtitle">
+                        Simulaciones predictivas basadas en datos históricos y temporadas
+                    </div>
+                </div>
+                
+                <!-- Advanced Controls Panel -->
+                <div class="advanced-controls-panel">
+                    <div class="controls-row">
+                        <!-- Time Period Selection -->
+                        <div class="control-group">
+                            <label for="periodSelector">
+                                <i class="fas fa-calendar-alt"></i>
+                                Período de Análisis
+                            </label>
+                            <select id="periodSelector" class="control-select">
+                                <option value="current-month">Mes Actual</option>
+                                <option value="last-3-months">Últimos 3 Meses</option>
+                                <option value="last-6-months">Últimos 6 Meses</option>
+                                <option value="current-year">Año Actual</option>
+                                <option value="custom">Personalizado</option>
+                            </select>
+                        </div>
+
+                        <!-- Month Selection -->
+                        <div class="control-group">
+                            <label for="monthSelector">
+                                <i class="fas fa-calendar"></i>
+                                Mes Específico
+                            </label>
+                            <select id="monthSelector" class="control-select">
+                                <option value="1">Enero</option>
+                                <option value="2">Febrero</option>
+                                <option value="3">Marzo</option>
+                                <option value="4">Abril</option>
+                                <option value="5">Mayo</option>
+                                <option value="6">Junio</option>
+                                <option value="7">Julio</option>
+                                <option value="8">Agosto</option>
+                                <option value="9">Septiembre</option>
+                                <option value="10">Octubre</option>
+                                <option value="11">Noviembre</option>
+                                <option value="12">Diciembre</option>
+                            </select>
+                        </div>
+
+                        <!-- Season Analysis -->
+                        <div class="control-group">
+                            <label for="seasonSelector">
+                                <i class="fas fa-leaf"></i>
+                                Temporada
+                            </label>
+                            <select id="seasonSelector" class="control-select">
+                                <option value="all">Todas las Temporadas</option>
+                                <option value="spring">Primavera (Mar-May)</option>
+                                <option value="summer">Verano (Jun-Ago)</option>
+                                <option value="autumn">Otoño (Sep-Nov)</option>
+                                <option value="winter">Invierno (Dic-Feb)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="controls-row">
+                        <!-- Monte Carlo Settings -->
+                        <div class="control-group">
+                            <label for="montecarloSimulations">
+                                <i class="fas fa-random"></i>
+                                Simulaciones Monte Carlo
+                            </label>
+                            <select id="montecarloSimulations" class="control-select">
+                                <option value="1000">1,000 simulaciones</option>
+                                <option value="5000">5,000 simulaciones</option>
+                                <option value="10000">10,000 simulaciones</option>
+                                <option value="50000">50,000 simulaciones</option>
+                            </select>
+                        </div>
+
+                        <!-- Risk Level -->
+                        <div class="control-group">
+                            <label for="riskLevel">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                Nivel de Riesgo
+                            </label>
+                            <select id="riskLevel" class="control-select">
+                                <option value="conservative">Conservador (95% confianza)</option>
+                                <option value="moderate">Moderado (90% confianza)</option>
+                                <option value="aggressive">Agresivo (85% confianza)</option>
+                            </select>
+                        </div>
+
+                        <!-- Analysis Type -->
+                        <div class="control-group">
+                            <label for="analysisType">
+                                <i class="fas fa-cogs"></i>
+                                Tipo de Análisis
+                            </label>
+                            <select id="analysisType" class="control-select">
+                                <option value="sales-prediction">Predicción de Ventas</option>
+                                <option value="inventory-optimization">Optimización de Inventario</option>
+                                <option value="seasonal-trends">Tendencias Estacionales</option>
+                                <option value="product-performance">Rendimiento de Productos</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="controls-actions">
+                        <button id="runAnalysisBtn" class="run-analysis-btn">
+                            <i class="fas fa-play-circle"></i>
+                            Ejecutar Análisis Monte Carlo
+                        </button>
+                        <button id="exportResultsBtn" class="export-btn">
+                            <i class="fas fa-download"></i>
+                            Exportar Resultados
+                        </button>
+                        <button id="resetAnalysisBtn" class="reset-btn">
+                            <i class="fas fa-refresh"></i>
+                            Reiniciar
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Real-time Statistics Overview -->
+                <div class="stats-overview">
+                    <div class="overview-card">
+                        <div class="overview-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="overview-content">
+                            <h4>Ventas Proyectadas</h4>
+                            <span class="overview-value" id="projectedSales">$0</span>
+                            <small class="overview-change" id="salesChange">+0%</small>
+                        </div>
+                    </div>
+                    <div class="overview-card">
+                        <div class="overview-icon">
+                            <i class="fas fa-boxes"></i>
+                        </div>
+                        <div class="overview-content">
+                            <h4>Stock Recomendado</h4>
+                            <span class="overview-value" id="recommendedStock">0</span>
+                            <small class="overview-change" id="stockEfficiency">0% eficiencia</small>
+                        </div>
+                    </div>
+                    <div class="overview-card">
+                        <div class="overview-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="overview-content">
+                            <h4>Producto Top</h4>
+                            <span class="overview-value" id="topProduct">N/A</span>
+                            <small class="overview-change" id="topProductPerformance">0% share</small>
+                        </div>
+                    </div>
+                    <div class="overview-card">
+                        <div class="overview-icon">
+                            <i class="fas fa-thermometer-half"></i>
+                        </div>
+                        <div class="overview-content">
+                            <h4>Confianza Modelo</h4>
+                            <span class="overview-value" id="modelConfidence">0%</span>
+                            <small class="overview-change" id="modelAccuracy">N/A precisión</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Advanced Charts Container -->
+                <div class="advanced-charts-container">
+                    <!-- Monte Carlo Simulation Results -->
+                    <div class="chart-card full-width">
+                        <div class="chart-header">
+                            <h3>
+                                <i class="fas fa-random"></i>
+                                Simulación Monte Carlo - Distribución de Resultados
+                            </h3>
+                            <div class="chart-controls">
+                                <button class="chart-btn" onclick="statisticsManager.toggleChartType('montecarlo')">
+                                    <i class="fas fa-exchange-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="montecarloChart"></canvas>
+                        </div>
+                        <div class="chart-insights" id="montecarloInsights">
+                            <div class="insight-item">
+                                <span class="insight-label">Escenario Optimista:</span>
+                                <span class="insight-value" id="optimisticScenario">$0</span>
+                            </div>
+                            <div class="insight-item">
+                                <span class="insight-label">Escenario Probable:</span>
+                                <span class="insight-value" id="likelyScenario">$0</span>
+                            </div>
+                            <div class="insight-item">
+                                <span class="insight-label">Escenario Pesimista:</span>
+                                <span class="insight-value" id="pessimisticScenario">$0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sales by Month -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>
+                                <i class="fas fa-calendar-alt"></i>
+                                Análisis Temporal por Meses
+                            </h3>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="monthlyAnalysisChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Seasonal Analysis -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>
+                                <i class="fas fa-leaf"></i>
+                                Tendencias Estacionales
+                            </h3>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="seasonalChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Product Performance Matrix -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>
+                                <i class="fas fa-th"></i>
+                                Matriz de Rendimiento de Productos
+                            </h3>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="performanceMatrixChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Risk Analysis -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>
+                                <i class="fas fa-shield-alt"></i>
+                                Análisis de Riesgo por Categoría
+                            </h3>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="riskAnalysisChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Inventory Optimization -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>
+                                <i class="fas fa-warehouse"></i>
+                                Optimización de Inventario
+                            </h3>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="inventoryOptimizationChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detailed Results Table -->
+                <div class="results-table-container">
+                    <div class="table-header">
+                        <h3>
+                            <i class="fas fa-table"></i>
+                            Resultados Detallados de la Simulación
+                        </h3>
+                        <div class="table-filters">
+                            <input type="text" id="tableSearch" placeholder="Buscar en resultados..." class="table-search">
+                            <select id="tableSort" class="table-sort">
+                                <option value="confidence-desc">Confianza (Mayor a Menor)</option>
+                                <option value="profit-desc">Ganancia (Mayor a Menor)</option>
+                                <option value="risk-asc">Riesgo (Menor a Mayor)</option>
+                                <option value="alphabetical">Alfabético</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="table-wrapper">
+                        <table id="resultsTable" class="results-table">
+                            <thead>
+                                <tr>
+                                    <th>Producto</th>
+                                    <th>Categoría</th>
+                                    <th>Mes Óptimo</th>
+                                    <th>Ventas Proyectadas</th>
+                                    <th>Confianza</th>
+                                    <th>Riesgo</th>
+                                    <th>ROI Esperado</th>
+                                    <th>Stock Recomendado</th>
+                                </tr>
+                            </thead>
+                            <tbody id="resultsTableBody">
+                                <tr>
+                                    <td colspan="8" class="table-loading">
+                                        <i class="fas fa-calculator"></i>
+                                        Ejecuta el análisis para ver resultados detallados
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Sales Simulations Tab -->
+        <div id="simulationsTab" class="tab-content">
+            <section class="simulations-section">
+                <div class="simulations-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-robot"></i>
+                        Simulaciones de Ventas por Quincena
+                    </h2>
+                    <div class="simulations-subtitle">
+                        Genera pedidos reales automáticamente usando tus productos de Firebase. Las ventas se simulan por quincenas y se guardan en la base de datos.
+                    </div>
+                </div>
+
+                <!-- Simulation Controls -->
+                <div class="simulation-controls-panel">
+                    <div class="controls-row">
+                        <div class="control-group">
+                            <label for="simulationMode">
+                                <i class="fas fa-cogs"></i>
+                                Modo de Simulación
+                            </label>
+                            <select id="simulationMode" class="control-select">
+                                <option value="realistic">Realista (Basado en datos históricos)</option>
+                                <option value="optimistic">Optimista (Ventas altas)</option>
+                                <option value="pessimistic">Pesimista (Ventas bajas)</option>
+                                <option value="seasonal">Estacional (Por temporadas)</option>
+                                <option value="random">Aleatorio (Variedad completa)</option>
+                            </select>
+                        </div>
+
+                        <div class="control-group">
+                            <label for="simulationDuration">
+                                <i class="fas fa-clock"></i>
+                                Duración de Simulación (Quincenas)
+                            </label>
+                            <select id="simulationDuration" class="control-select">
+                                <option value="1">1 quincena</option>
+                                <option value="2" selected>1 mes (2 quincenas)</option>
+                                <option value="6">3 meses (6 quincenas)</option>
+                                <option value="12">6 meses (12 quincenas)</option>
+                                <option value="24">1 año (24 quincenas)</option>
+                            </select>
+                        </div>
+
+                        <div class="control-group">
+                            <label for="customerCount">
+                                <i class="fas fa-users"></i>
+                                Cantidad de Clientes por Quincena
+                            </label>
+                            <input type="number" id="customerCount" class="control-input" value="5" min="1" max="50" placeholder="Número de clientes">
+                            <small class="control-help">Número de clientes que harán pedidos cada quincena</small>
+                        </div>
+
+                        <div class="control-group">
+                            <label for="simulationSpeed">
+                                <i class="fas fa-tachometer-alt"></i>
+                                Velocidad de Simulación
+                            </label>
+                            <select id="simulationSpeed" class="control-select">
+                                <option value="slow">Lenta (1x tiempo real)</option>
+                                <option value="normal" selected>Normal (10x tiempo real)</option>
+                                <option value="fast">Rápida (100x tiempo real)</option>
+                                <option value="instant">Instantánea</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="controls-row">
+                        <div class="control-group">
+                            <label for="autoStart">
+                                <i class="fas fa-play-circle"></i>
+                                Inicio Automático
+                            </label>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="autoStart" checked>
+                                <label for="autoStart" class="toggle-label">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label for="notifications">
+                                <i class="fas fa-bell"></i>
+                                Notificaciones
+                            </label>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="notifications" checked>
+                                <label for="notifications" class="toggle-label">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label for="autoStop">
+                                <i class="fas fa-stop-circle"></i>
+                                Parada Automática
+                            </label>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="autoStop">
+                                <label for="autoStop" class="toggle-label">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="simulation-actions">
+                        <button id="startSimulationBtn" class="start-simulation-btn">
+                            <i class="fas fa-play"></i>
+                            Iniciar Simulación
+                        </button>
+                        <button id="pauseSimulationBtn" class="pause-simulation-btn" disabled>
+                            <i class="fas fa-pause"></i>
+                            Pausar
+                        </button>
+                        <button id="stopSimulationBtn" class="stop-simulation-btn" disabled>
+                            <i class="fas fa-stop"></i>
+                            Detener
+                        </button>
+                        <button id="resetSimulationBtn" class="reset-simulation-btn">
+                            <i class="fas fa-refresh"></i>
+                            Reiniciar
+                        </button>
+                        <button id="reloadFirebaseBtn" class="reset-simulation-btn">
+                            <i class="fas fa-sync"></i>
+                            Recargar Firebase
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Real-time Simulation Dashboard -->
+                <div class="simulation-dashboard">
+                    <div class="dashboard-card">
+                        <div class="dashboard-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="dashboard-content">
+                            <h4>Ventas Simuladas</h4>
+                            <span class="dashboard-value" id="simulatedSales">$0</span>
+                            <small class="dashboard-change" id="salesTrend">+0%</small>
+                        </div>
+                    </div>
+                    <div class="dashboard-card">
+                        <div class="dashboard-icon">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <div class="dashboard-content">
+                            <h4>Ganancias</h4>
+                            <span class="dashboard-value profit" id="totalProfit">$0</span>
+                            <small class="dashboard-change" id="profitMargin">0% margen</small>
+                        </div>
+                    </div>
+                    <div class="dashboard-card">
+                        <div class="dashboard-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="dashboard-content">
+                            <h4>Pérdidas</h4>
+                            <span class="dashboard-value loss" id="totalLosses">$0</span>
+                            <small class="dashboard-change" id="lossRate">0% tasa</small>
+                        </div>
+                    </div>
+                    <div class="dashboard-card">
+                        <div class="dashboard-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <div class="dashboard-content">
+                            <h4>Pedidos</h4>
+                            <span class="dashboard-value" id="totalOrders">0</span>
+                            <small class="dashboard-change" id="orderRate">0/min</small>
+                        </div>
+                    </div>
+                    <div class="dashboard-card">
+                        <div class="dashboard-icon">
+                            <i class="fas fa-boxes"></i>
+                        </div>
+                        <div class="dashboard-content">
+                            <h4>Productos Vendidos</h4>
+                            <span class="dashboard-value" id="productsSold">0</span>
+                            <small class="dashboard-change" id="topCategory">N/A</small>
+                        </div>
+                    </div>
+                    <div class="dashboard-card">
+                        <div class="dashboard-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="dashboard-content">
+                            <h4>Clientes Simulados</h4>
+                            <span class="dashboard-value" id="simulatedCustomers">0</span>
+                            <small class="dashboard-change" id="customerGrowth">+0%</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Simulation Log -->
+                <div class="simulation-log-container">
+                    <div class="log-header">
+                        <h3>
+                            <i class="fas fa-list-alt"></i>
+                            Registro de Simulación en Tiempo Real
+                        </h3>
+                        <div class="log-controls">
+                            <button id="clearLogBtn" class="clear-log-btn">
+                                <i class="fas fa-trash"></i>
+                                Limpiar
+                            </button>
+                            <button id="exportLogBtn" class="export-log-btn">
+                                <i class="fas fa-download"></i>
+                                Exportar
+                            </button>
+                        </div>
+                    </div>
+                    <div class="log-content" id="simulationLog">
+                        <div class="log-entry info">
+                            <span class="log-time">00:00:00</span>
+                            <span class="log-message">Sistema de simulación listo. Configura los parámetros y presiona "Iniciar Simulación".</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category Performance -->
+                <div class="category-performance-container">
+                    <h3>
+                        <i class="fas fa-chart-bar"></i>
+                        Rendimiento por Categoría (Top 10)
+                    </h3>
+                    <div class="category-performance-grid" id="categoryPerformanceGrid">
+                        <!-- Las 10 categorías se generarán dinámicamente -->
+                    </div>
+                </div>
+
+                <!-- Simulation Charts -->
+                <div class="simulation-charts-container">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>
+                                <i class="fas fa-chart-area"></i>
+                                Ventas en Tiempo Real
+                            </h3>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="realtimeSalesChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>
+                                <i class="fas fa-chart-pie"></i>
+                                Distribución por Categoría
+                            </h3>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="categoryDistributionChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>
+                                <i class="fas fa-chart-line"></i>
+                                Ganancias vs Pérdidas
+                            </h3>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="profitLossChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
     </div>
 
     <!-- Enhanced thermal ticket template with complete customer information -->
@@ -257,11 +858,27 @@
             <div class="ticket-thanks">¡GRACIAS POR TU COMPRA!</div>
             <div class="ticket-thanks">VUELVE PRONTO</div>
             <div class="ticket-contact">WhatsApp: +52 56 2727 4791</div>
-            <div class="ticket-contact">Email: vhjocar@gmail.com</div>
+            <div class="tickeimage.pngt-contact">Email: vhjocar@gmail.com</div>
         </div>
     </div>
     
-    <script type="module" src="admin.js"></script>
+    <!-- Chart.js para estadísticas (versiones específicas) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@2.1.0/dist/chartjs-plugin-annotation.min.js"></script>
+    
+    <script type="module">
+        import { adminManager } from './admin.js';
+        window.adminManager = adminManager;
+    </script>
+    
+    <!-- Simulation Engine Script -->
+    <script src="simulation-engine.js"></script>
+    <script>
+        // Initialize simulation engine when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            window.simulationEngine = new SalesSimulationEngine();
+        });
+    </script>
 
 </body>
 </html>
